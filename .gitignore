@@ -154,3 +154,4 @@ fabric.properties
 .idea
 .vscode
 *.iml
+/backend/target/
