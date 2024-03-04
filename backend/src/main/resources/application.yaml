@@ -1,5 +1,6 @@
 server:
   port: 8081
+
 spring:
   application:
     name: hmdp
@@ -21,8 +22,24 @@ spring:
           time-between-eviction-runs: 10s
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    use-root-path: true
+  show-actuator: true
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
 mybatis-plus:
   type-aliases-package: com.hmdp.entity # 别名扫描包
+
 logging:
   level:
     com.hmdp: debug

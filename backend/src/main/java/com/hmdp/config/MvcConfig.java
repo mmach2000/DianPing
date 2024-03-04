@@ -26,7 +26,14 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/shop/**",
                         "/shop-type/**",
                         "/upload/**",
-                        "/voucher/**"
+                        // TODO: 更好的放行/拦截模式
+                        "/voucher/**",
+                        "/swagger-ui.html",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/webjars/**",
+                        "/doc.html",
+                        "/v3/api-docs/**"
                 ).order(1);
     }
 }
