@@ -5,8 +5,8 @@ import com.hmdp.dto.UserDTO;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -30,8 +30,7 @@ public class RefreshTokenInterceptor implements HandlerInterceptor {
         // 2. 获取用户信息
         Map<Object, Object> userMap = stringRedisTemplate.opsForHash().entries(LOGIN_TOKEN_PREFIX + token);
         if (userMap.isEmpty()) {
-            response.setStatus(401);
-            return false;
+            return true;
         }
         UserDTO userDTO = BeanUtil.fillBeanWithMap(userMap, new UserDTO(), true);
         // 3. 将用户信息放入ThreadLocal
