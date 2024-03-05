@@ -13,10 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
-import static com.hmdp.utils.RedisConstants.*;
 import static com.hmdp.utils.RedisConstants.CACHE_SHOP_TTL_MINUTES;
+import static com.hmdp.utils.RedisConstants.CACHE_SHOP_TYPE_KEY;
 
 /**
  * <p>
