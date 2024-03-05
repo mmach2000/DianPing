@@ -6,7 +6,7 @@ public class RedisConstants {
     public static final String CACHE_SHOP_PREFIX = "cache:shop:";
     public static final String CACHE_SHOP_TYPE_KEY = "cache:shop_type:";
 
-    public static final String LOCK_SHOP_PREFIX = "lock:shop:";
+    public static final String LOCK_UPDATE_PREFIX = "lock:update:";
 
     public static final String SECKILL_STOCK_PREFIX = "seckill:stock:";
     public static final String BLOG_LIKED_PREFIX = "blog:liked:";
@@ -16,5 +16,7 @@ public class RedisConstants {
 
     public static final Long LOGIN_CODE_TTL_MINUTES = 2L;
     public static final Long LOGIN_TOKEN_TTL_MINUTES = 30L;
-    public static final Long LOCK_SHOP_TTL_MINUTES = 10L;
+    public static final Long CACHE_SHOP_TTL_MINUTES = 30L;
+    public static final Long CACHE_SHOP_TYPE_TTL_MINUTES = 120L;
+    public static final Long CACHE_NULL_TTL_MINUTES = 2L;
 }
