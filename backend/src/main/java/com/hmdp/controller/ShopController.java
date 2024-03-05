@@ -11,9 +11,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 商铺控制器
  *
  * @author 虎哥
  * @since 2021-12-22
@@ -33,7 +31,7 @@ public class ShopController {
      */
     @GetMapping("/{id}")
     public Result queryShopById(@PathVariable("id") Long id) {
-        return shopService.getByIdCached(id);
+        return shopService.cachedGetById(id);
     }
 
     /**
@@ -59,7 +57,7 @@ public class ShopController {
     @PutMapping
     public Result updateShop(@RequestBody Shop shop) {
         // 写入数据库
-        shopService.updateById(shop);
+        shopService.cachedUpdateById(shop);
         return Result.ok();
     }
 
@@ -72,13 +70,13 @@ public class ShopController {
      */
     @GetMapping("/of/type")
     public Result queryShopByType(
-            @RequestParam("typeId") Integer typeId,
-            @RequestParam(value = "current", defaultValue = "1") Integer current
+        @RequestParam("typeId") Integer typeId,
+        @RequestParam(value = "current", defaultValue = "1") Integer current
     ) {
         // 根据类型分页查询
         Page<Shop> page = shopService.query()
-                .eq("type_id", typeId)
-                .page(new Page<>(current, SystemConstants.DEFAULT_PAGE_SIZE));
+            .eq("type_id", typeId)
+            .page(new Page<>(current, SystemConstants.DEFAULT_PAGE_SIZE));
         // 返回数据
         return Result.ok(page.getRecords());
     }
@@ -92,13 +90,13 @@ public class ShopController {
      */
     @GetMapping("/of/name")
     public Result queryShopByName(
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "current", defaultValue = "1") Integer current
+        @RequestParam(value = "name", required = false) String name,
+        @RequestParam(value = "current", defaultValue = "1") Integer current
     ) {
         // 根据类型分页查询
         Page<Shop> page = shopService.query()
-                .like(StrUtil.isNotBlank(name), "name", name)
-                .page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
+            .like(StrUtil.isNotBlank(name), "name", name)
+            .page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
         // 返回数据
         return Result.ok(page.getRecords());
     }

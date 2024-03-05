@@ -13,6 +13,7 @@ import com.hmdp.entity.Shop;
  * @since 2021-12-22
  */
 public interface IShopService extends IService<Shop> {
+    Result cachedGetById(Long id);
 
-    Result getByIdCached(Long id);
+    Result cachedUpdateById(Shop shop);
 }

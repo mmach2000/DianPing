@@ -14,7 +14,6 @@ import com.hmdp.service.IUserService;
 import com.hmdp.utils.RedisConstants;
 import com.hmdp.utils.RegexUtils;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
-    public Result sendCode(String phone, HttpSession session) {
+    public Result sendCode(String phone) {
 
         // 发送短信验证码并保存验证码
         // 1. 判断手机号是否合法
@@ -55,7 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Result login(LoginFormDTO loginForm, HttpSession session) {
+    public Result login(LoginFormDTO loginForm) {
         String phone = loginForm.getPhone();
         String code = loginForm.getCode();
 
@@ -88,9 +87,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         UserDTO userDTO = new UserDTO();
         BeanUtil.copyProperties(user, userDTO);
         Map<String, Object> userMap = BeanUtil.beanToMap(userDTO, new HashMap<>(),
-                CopyOptions.create()
-                        .setIgnoreNullValue(true)
-                        .setFieldValueEditor((name, value) -> value instanceof String ? value : value.toString()));
+            CopyOptions.create()
+                .setIgnoreNullValue(true)
+                .setFieldValueEditor((name, value) -> value instanceof String ? value : value.toString()));
         stringRedisTemplate.opsForHash().putAll(RedisConstants.LOGIN_TOKEN_PREFIX + token, userMap);
         stringRedisTemplate.expire(RedisConstants.LOGIN_TOKEN_PREFIX + token, RedisConstants.LOGIN_TOKEN_TTL_MINUTES, TimeUnit.MINUTES);
 

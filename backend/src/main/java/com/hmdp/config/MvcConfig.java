@@ -16,24 +16,24 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate))
-                .addPathPatterns("/**")
-                .order(0);
+            .addPathPatterns("/**")
+            .order(0);
         registry.addInterceptor(new LoginInterceptor())
-                .excludePathPatterns(
-                        "/user/code",
-                        "/user/login",
-                        "/blog/hot",
-                        "/shop/**",
-                        "/shop-type/**",
-                        "/upload/**",
-                        // TODO: 更好的放行/拦截模式
-                        "/voucher/**",
-                        "/swagger-ui.html",
-                        "/swagger-ui/**",
-                        "/swagger-resources/**",
-                        "/webjars/**",
-                        "/doc.html",
-                        "/v3/api-docs/**"
-                ).order(1);
+            .excludePathPatterns(
+                "/user/code",
+                "/user/login",
+                "/blog/hot",
+                "/shop/**",
+                "/shop-type/**",
+                "/upload/**",
+                "/voucher/**",
+                // TODO: 更好的放行/拦截模式
+                "/swagger-ui.html",
+                "/swagger-ui/**",
+                "/swagger-resources/**",
+                "/webjars/**",
+                "/doc.html",
+                "/v3/api-docs/**"
+            ).order(1);
     }
 }

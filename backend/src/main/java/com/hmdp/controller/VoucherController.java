@@ -8,9 +8,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 优惠券控制器
  *
  * @author 虎哥
  * @since 2021-12-22
